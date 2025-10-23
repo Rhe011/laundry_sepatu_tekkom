@@ -137,5 +137,5 @@ http://localhost:3000/api/items
 
 ## Link Deploy
 
-* **Vercel:** [Link Deploy Vercel kamu](#)
+* **Vercel:** [https://laundry-sepatu-tekkom.vercel.app/](#)
 
