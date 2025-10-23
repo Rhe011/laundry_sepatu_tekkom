@@ -1,30 +1,147 @@
-# laundry_sepatu_tekkom
-
-REST API sederhana untuk layanan cuci sepatu berbasis **Node.js**, **Express.js**, dan **Supabase**.  
-Mendukung operasi CRUD dan filter status sepatu (`GET /items?status=Selesai`).
-
-## Fitur
-- CRUD sepatu
-- Filter status
-- Database Supabase
-- Deploy ke Vercel
+# Laundry Sepatu Tekkom API
 
 ## Struktur Data
-| Kolom | Tipe | Keterangan |
-|-------|------|------------|
-| id | serial | Primary key |
-| nama | text | Nama sepatu |
-| status | text | Sedang Dicuci / Selesai |
-| tanggal_masuk | date | Tanggal diterima |
-| tanggal_selesai | date | Tanggal selesai |
-| created_at | timestamptz | Otomatis |
 
-Contoh:
+| Field           | Tipe / Keterangan                                      |
+|-----------------|--------------------------------------------------------|
+| **id**          | Nomor unik sepatu                                      |
+| **nama**        | Nama sepatu atau merek pelanggan                       |
+| **status**      | Status proses cuci (`Sedang Dicuci` / `Selesai`)      |
+| **tanggalMasuk**| Tanggal sepatu diterima untuk dicuci                  |
+| **tanggalSelesai** | Tanggal sepatu selesai dicuci (`-` jika belum selesai) |
+
+---
+
+## Contoh Request & Response
+
+### GET /api/items
+
+**Response:**
+
+```json
+[
+  {
+    "id": 1,
+    "nama": "Converse Chuck Taylor",
+    "status": "Selesai",
+    "tanggalMasuk": "2025-10-01",
+    "tanggalSelesai": "2025-10-03"
+  }
+]
+```
+
+### GET /api/items?status=Selesai
+
+**Response:**
+
+```json
+[
+  {
+    "id": 1,
+    "nama": "Converse Chuck Taylor",
+    "status": "Selesai",
+    "tanggalMasuk": "2025-10-01",
+    "tanggalSelesai": "2025-10-03"
+  }
+]
+```
+
+### POST /api/items
+
+**Body:**
+
 ```json
 {
-  "id": 1,
-  "nama": "Nike Air Force 1",
+  "nama": "Nike Air Max",
   "status": "Sedang Dicuci",
-  "tanggal_masuk": "2025-10-08",
-  "tanggal_selesai": null
+  "tanggalMasuk": "2025-10-08",
+  "tanggalSelesai": "-"
 }
+```
+
+**Response:**
+
+```json
+{
+  "message": "Data sepatu berhasil ditambahkan."
+}
+```
+
+### PUT /api/items/:id
+
+**Body:**
+
+```json
+{
+  "status": "Selesai",
+  "tanggalSelesai": "2025-10-09"
+}
+```
+
+**Response:**
+
+```json
+{
+  "message": "Status sepatu berhasil diperbarui."
+}
+```
+
+### DELETE /api/items/:id
+
+**Response:**
+
+```json
+{
+  "message": "Data sepatu berhasil dihapus."
+}
+```
+
+---
+
+## Instalasi & Menjalankan API
+
+1. **Clone repository**
+
+```bash
+git clone https://github.com/username/laundry_sepatu_tekkom.git
+cd laundry_sepatu_tekkom
+```
+
+2. **Install dependencies**
+
+```bash
+npm install
+```
+
+3. **Buat file `.env` di root project**
+
+```
+SUPABASE_URL=your_supabase_url
+SUPABASE_ANON_KEY=your_supabase_anon_key
+PORT=3000
+```
+
+4. **Jalankan server**
+
+```bash
+npm run dev
+```
+
+5. **Akses API**
+
+```
+http://localhost:3000/api/items
+```
+
+---
+
+## Link Deploy
+
+* **Vercel:** [Link Deploy Vercel kamu](#)
+
+---
+
+## Catatan
+
+* Jangan upload **.env** atau file sensitif ke GitHub.
+* Gunakan **.gitignore** untuk mengabaikan `node_modules/` dan file sensitif.
