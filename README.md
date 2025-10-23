@@ -139,9 +139,3 @@ http://localhost:3000/api/items
 
 * **Vercel:** [Link Deploy Vercel kamu](#)
 
----
-
-## Catatan
-
-* Jangan upload **.env** atau file sensitif ke GitHub.
-* Gunakan **.gitignore** untuk mengabaikan `node_modules/` dan file sensitif.
